@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Velour Essence — Brand Guidelines & Design System</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --burgundy: #3D0C13;
@@ -22,42 +23,39 @@
     --green-text: #1E6B33;
     --red-bg: #FBEAEA;
     --red-text: #B3261E;
+    --sidebar-width: 260px;
   }
 
-  /* Zero-scroll reset rule */
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* Core Reset */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
   html, body {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden !important; /* Prevents viewport scrolling for clean screenshots */
+    width: 100%;
+    min-height: 100vh;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    background: var(--burgundy-dark);
+    background-color: var(--burgundy-dark);
     color: var(--ink);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* App Window Shell */
-  .app-window {
-    width: 100%;
-    max-width: 1380px;
-    height: 100%;
-    max-height: 920px;
-    background: var(--cream);
-    border-radius: 16px;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+  /* App Outer Shell */
+  .app-frame {
     display: flex;
     flex-direction: column;
-    border: 1px solid rgba(197, 160, 89, 0.4);
-    overflow: hidden;
+    min-height: 100vh;
+    width: 100%;
+    background: var(--cream);
   }
 
-  /* Top Notice Bar */
+  /* Top Bar Header */
   .top-bar {
-    height: 38px;
-    background: linear-gradient(90deg, #1d0509 0%, #3D0C13 50%, #1d0509 100%);
+    height: 44px;
+    background: linear-gradient(90deg, #1A0508 0%, var(--burgundy) 50%, #1A0508 100%);
     color: var(--gold-light);
     font-size: 11px;
     font-weight: 700;
@@ -66,79 +64,82 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 24px;
+    padding: 0 20px;
     border-bottom: 1px solid rgba(197, 160, 89, 0.3);
-    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 50;
   }
 
-  .badge {
-    background: var(--gold);
-    color: var(--burgundy);
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 10px;
-    font-weight: 800;
+  .mobile-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--gold-light);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px;
   }
 
-  /* Main Workspace Layout */
+  /* App Body Wrapper */
   .app-body {
     display: flex;
-    flex-grow: 1;
-    height: calc(100% - 38px);
-    overflow: hidden;
+    flex: 1;
+    position: relative;
+    width: 100%;
   }
 
   /* Navigation Sidebar */
   .sidebar {
-    width: 270px;
+    width: var(--sidebar-width);
     background: #ffffff;
     border-right: 1px solid var(--line);
-    padding: 24px 18px;
+    padding: 24px 16px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     flex-shrink: 0;
-    height: 100%;
+    transition: transform 0.3s ease;
+    z-index: 40;
   }
 
-  .brand-block {
+  .brand-header {
     display: flex;
     align-items: center;
     gap: 12px;
-    text-decoration: none;
-    cursor: pointer;
-    padding-bottom: 20px;
+    padding-bottom: 16px;
     border-bottom: 1px solid var(--line);
   }
 
   .crest-logo {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: 2px solid var(--gold);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fff;
+    background: #ffffff;
     box-shadow: 0 4px 12px rgba(197, 160, 89, 0.25);
     flex-shrink: 0;
   }
 
-  .brand-text .wordmark {
+  .brand-title .wordmark {
     font-family: 'Cinzel', serif;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 14px;
     color: var(--burgundy);
-    line-height: 1.1;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
   }
 
-  .brand-text .tagline {
+  .brand-title .tagline {
     font-size: 9px;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.2px;
     color: var(--gold-dark);
     font-weight: 700;
     text-transform: uppercase;
-    margin-top: 3px;
+    margin-top: 2px;
   }
 
   .nav-menu {
@@ -149,10 +150,10 @@
     margin-top: 16px;
   }
 
-  .nav-btn {
+  .nav-item {
     padding: 10px 14px;
     border-radius: 8px;
-    font-size: 12.5px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--gray);
     cursor: pointer;
@@ -160,138 +161,138 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid transparent;
   }
 
-  .nav-btn:hover {
+  .nav-item:hover {
     background: var(--silk);
     color: var(--burgundy);
   }
 
-  .nav-btn.active {
+  .nav-item.active {
     background: var(--burgundy);
     color: #ffffff;
-    box-shadow: 0 4px 12px rgba(61, 12, 19, 0.2);
+    box-shadow: 0 4px 12px rgba(61, 12, 19, 0.25);
   }
 
-  .nav-btn .num {
+  .nav-item .num {
     font-size: 10px;
     opacity: 0.7;
     font-family: 'Cinzel', serif;
   }
 
   .sidebar-footer {
-    padding-top: 14px;
+    padding-top: 16px;
     border-top: 1px solid var(--line);
-    font-size: 10.5px;
+    font-size: 10px;
     color: var(--gray);
     line-height: 1.4;
   }
 
-  /* Content Display Screen */
+  /* Main Viewport Content */
   .viewport {
-    flex-grow: 1;
-    height: 100%;
+    flex: 1;
     padding: 32px 40px;
     background: var(--cream);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: hidden; /* Guaranteed no scrollbars for screenshots */
+    min-width: 0;
   }
 
-  .screen {
+  .slide {
     display: none;
-    height: 100%;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 24px;
     animation: fadeIn 0.25s ease-out;
   }
 
-  .screen.active {
+  .slide.active {
     display: flex;
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
+    from { opacity: 0; transform: translateY(4px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Header Section Formatting */
+  /* Typography */
   .kicker {
     display: inline-block;
     background: var(--burgundy);
     color: var(--gold-light);
-    font-size: 9.5px;
+    font-size: 9px;
     font-weight: 700;
     letter-spacing: 1.5px;
     padding: 4px 12px;
-    border-radius: 20px;
+    border-radius: 12px;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 
   h1 {
     font-family: 'Cinzel', serif;
     color: var(--burgundy);
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 700;
-    line-height: 1.15;
-    margin-bottom: 8px;
+    line-height: 1.2;
+    margin-bottom: 6px;
   }
 
   .lead {
     color: var(--gray);
-    font-size: 13.5px;
-    line-height: 1.5;
-    max-width: 820px;
+    font-size: 13px;
+    line-height: 1.6;
+    max-width: 800px;
   }
 
-  /* Fit Grids */
+  /* Grids & Cards */
   .grid { display: grid; gap: 16px; width: 100%; }
   .grid-2 { grid-template-columns: repeat(2, 1fr); }
   .grid-3 { grid-template-columns: repeat(3, 1fr); }
 
-  /* UI Cards */
   .card {
     background: #ffffff;
     border: 1px solid var(--line);
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 4px 15px rgba(61, 12, 19, 0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.04);
   }
 
   .card h3 {
     font-family: 'Cinzel', serif;
     color: var(--burgundy);
-    font-size: 16px;
+    font-size: 15px;
     margin-bottom: 6px;
   }
 
   .card p {
     color: var(--gray);
-    font-size: 12.5px;
-    line-height: 1.45;
+    font-size: 12px;
+    line-height: 1.5;
   }
 
-  /* Logo Screen Elements */
+  /* Logo Showcase */
   .crest-box {
     background: #ffffff;
     border: 1px solid var(--line);
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 24px;
     text-align: center;
   }
 
   .crest-box.dark {
     background: var(--burgundy);
-    color: #fff;
+    color: #ffffff;
     border-color: var(--burgundy-dark);
   }
 
   .crest-icon-lg {
-    width: 64px;
-    height: 64px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     border: 2px solid var(--gold);
     display: flex;
@@ -303,28 +304,27 @@
 
   .crest-title {
     font-family: 'Cinzel', serif;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     color: var(--burgundy);
-    margin-bottom: 4px;
   }
   .dark .crest-title { color: #ffffff; }
 
-  .crest-sub { font-size: 11.5px; color: var(--gray); }
+  .crest-sub { font-size: 11px; color: var(--gray); margin-top: 2px; }
   .dark .crest-sub { color: var(--gold-light); }
 
   .prohibited-box {
     background: var(--red-bg);
-    border: 1px solid rgba(179, 38, 30, 0.2);
-    border-radius: 12px;
-    padding: 18px 22px;
+    border: 1px solid rgba(179, 38, 30, 0.25);
+    border-radius: 10px;
+    padding: 16px 20px;
   }
 
   .prohibited-box h4 {
     color: var(--red-text);
     font-family: 'Cinzel', serif;
     font-size: 14px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
   .prohibited-box ul {
@@ -334,62 +334,63 @@
     line-height: 1.6;
   }
 
-  /* Color Swatches */
+  /* Swatches */
   .swatch-card {
     background: #ffffff;
     border: 1px solid var(--line);
-    border-radius: 12px;
+    border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.2s;
   }
 
-  .swatch-card:hover { transform: translateY(-2px); }
+  .swatch-card:hover {
+    transform: translateY(-2px);
+  }
 
   .swatch-bar {
-    height: 70px;
-    padding: 10px;
+    height: 64px;
+    padding: 8px;
     display: flex;
     align-items: flex-end;
   }
 
   .swatch-hex {
-    background: rgba(0,0,0,0.35);
-    backdrop-filter: blur(4px);
+    background: rgba(0,0,0,0.4);
     color: #ffffff;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     padding: 3px 8px;
     border-radius: 4px;
     letter-spacing: 0.5px;
   }
 
-  .swatch-info { padding: 12px 14px; }
-  .swatch-name { font-weight: 700; font-size: 13.5px; color: var(--ink); }
+  .swatch-info { padding: 12px; }
+  .swatch-name { font-weight: 700; font-size: 13px; color: var(--ink); }
   .swatch-use { font-size: 11px; color: var(--gray); margin-top: 2px; }
 
-  /* Typography Specimens */
+  /* Typography Specimen */
   .type-specimen {
     background: #ffffff;
     border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 24px;
+    border-radius: 10px;
+    padding: 20px;
   }
 
   .type-tag {
     font-size: 10px;
-    letter-spacing: 1px;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
     color: var(--gold-dark);
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
   .type-heading {
-    font-size: 26px;
+    font-size: 22px;
     color: var(--burgundy);
-    margin-bottom: 8px;
-    line-height: 1.1;
+    margin-bottom: 6px;
+    line-height: 1.2;
   }
 
   .type-heading.serif { font-family: 'Cinzel', serif; font-weight: 700; }
@@ -398,19 +399,19 @@
   /* Tone of Voice Cards */
   .tone-card {
     padding: 14px 18px;
-    border-radius: 10px;
-    font-size: 12.5px;
+    border-radius: 8px;
+    font-size: 12px;
     line-height: 1.5;
     display: flex;
     gap: 12px;
     align-items: center;
   }
 
-  .tone-card.do { background: var(--green-bg); color: var(--green-text); border: 1px solid rgba(30,142,62,0.2); }
-  .tone-card.dont { background: var(--red-bg); color: var(--red-text); border: 1px solid rgba(179,38,30,0.2); }
+  .tone-card.do { background: var(--green-bg); color: var(--green-text); border: 1px solid rgba(30,107,51,0.25); }
+  .tone-card.dont { background: var(--red-bg); color: var(--red-text); border: 1px solid rgba(179,38,30,0.25); }
 
   .tone-badge {
-    font-size: 10px;
+    font-size: 9.5px;
     text-transform: uppercase;
     padding: 3px 8px;
     border-radius: 4px;
@@ -418,429 +419,463 @@
     flex-shrink: 0;
   }
 
-  .do .tone-badge { background: var(--green-text); color: #fff; }
-  .dont .tone-badge { background: var(--red-text); color: #fff; }
+  .do .tone-badge { background: var(--green-text); color: #ffffff; }
+  .dont .tone-badge { background: var(--red-text); color: #ffffff; }
 
-  /* Exporter Form Utility */
-  .exporter-card {
-    background: #ffffff;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 24px;
+  /* Interactive Asset Generator */
+  .input-group {
+    margin-bottom: 12px;
   }
 
-  .form-group { margin-bottom: 14px; }
-  .form-group label {
+  .input-group label {
     display: block;
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
     color: var(--gray);
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 
-  .form-control {
+  .input-group input {
     width: 100%;
     padding: 10px 12px;
     border: 1px solid var(--line);
-    border-radius: 8px;
-    font-size: 13px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background: var(--cream);
-    color: var(--ink);
-  }
-
-  .form-control:focus {
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: inherit;
     outline: none;
-    border-color: var(--gold);
-    background: #ffffff;
   }
 
-  .btn {
+  .input-group input:focus {
+    border-color: var(--gold);
+  }
+
+  /* Navigation Footer */
+  .controls-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    margin-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  .nav-btn-cmd {
     background: var(--burgundy);
     color: #ffffff;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
+    border: 1px solid var(--burgundy);
+    padding: 10px 20px;
+    border-radius: 6px;
     font-size: 11px;
     font-weight: 700;
-    text-transform: uppercase;
     letter-spacing: 1px;
+    text-transform: uppercase;
     cursor: pointer;
-    width: 100%;
+    transition: all 0.2s ease;
   }
 
-  .btn:hover { background: var(--burgundy-dark); }
+  .nav-btn-cmd:hover {
+    background: var(--burgundy-dark);
+    border-color: var(--gold);
+  }
 
-  /* Notification Toast */
+  .page-indicator {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray);
+  }
+
+  /* Toast Popup */
   .toast {
     position: fixed;
     bottom: 24px;
     left: 50%;
-    transform: translateX(-50%) translateY(50px);
+    transform: translateX(-50%) translateY(100px);
     background: var(--burgundy);
     color: #ffffff;
-    padding: 10px 22px;
+    padding: 10px 24px;
     border-radius: 30px;
     font-size: 12px;
     font-weight: 600;
     border: 1px solid var(--gold);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     opacity: 0;
-    pointer-events: none;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 1000;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 100;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
   }
 
   .toast.show {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
   }
+
+  /* Responsive Media Queries */
+  @media (max-width: 820px) {
+    .mobile-toggle { display: block; }
+    
+    .sidebar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      transform: translateX(-100%);
+      box-shadow: 10px 0 30px rgba(0,0,0,0.2);
+    }
+
+    .sidebar.open {
+      transform: translateX(0);
+    }
+
+    .viewport {
+      padding: 20px 16px;
+    }
+
+    .grid-2, .grid-3 {
+      grid-template-columns: 1fr;
+    }
+
+    h1 { font-size: 22px; }
+  }
 </style>
 </head>
 <body>
 
-<div class="app-window">
-  <!-- Top System Bar -->
+<div class="app-frame">
+  <!-- Top Bar Nav -->
   <header class="top-bar">
-    <span>✦ Velour Essence Brand Guidelines Manual ✦</span>
-    <span>SYSTEM v2.6 <span class="badge">SCREENSHOT-READY</span></span>
+    <button class="mobile-toggle" onclick="toggleSidebar()" aria-label="Toggle Menu">☰</button>
+    <span>Velour Essence — Brand Guidelines</span>
+    <span>GitHub Pages Ready</span>
   </header>
 
   <div class="app-body">
-    <!-- Navigation Sidebar -->
-    <aside class="sidebar">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
       <div>
-        <div class="brand-block" onclick="switchTab('overview')">
+        <div class="brand-header">
           <div class="crest-logo">
-            <svg width="24" height="24" viewBox="0 0 100 100" fill="none">
+            <svg width="22" height="22" viewBox="0 0 100 100" fill="none">
               <circle cx="50" cy="50" r="46" stroke="#C5A059" stroke-width="3"/>
               <path d="M34 34L40 41L50 29L60 41L66 34L69 46H31L34 34Z" fill="#C5A059"/>
               <path d="M32 50H44L50 66L56 50H68L54 74H46L32 50Z" fill="#3D0C13"/>
             </svg>
           </div>
-          <div class="brand-text">
+          <div class="brand-title">
             <div class="wordmark">VELOUR ESSENCE</div>
-            <div class="tagline">Interactive Manual</div>
+            <div class="tagline">Brand Guidelines</div>
           </div>
         </div>
 
         <ul class="nav-menu">
-          <li class="nav-btn active" onclick="switchTab('overview')">
-            <span>Overview</span>
-            <span class="num">01</span>
-          </li>
-          <li class="nav-btn" onclick="switchTab('logos')">
-            <span>Logo & Crest</span>
-            <span class="num">02</span>
-          </li>
-          <li class="nav-btn" onclick="switchTab('colors')">
-            <span>Color System</span>
-            <span class="num">03</span>
-          </li>
-          <li class="nav-btn" onclick="switchTab('typography')">
-            <span>Typography</span>
-            <span class="num">04</span>
-          </li>
-          <li class="nav-btn" onclick="switchTab('tone')">
-            <span>Tone of Voice</span>
-            <span class="num">05</span>
-          </li>
-          <li class="nav-btn" onclick="switchTab('imagery')">
-            <span>Art Direction</span>
-            <span class="num">06</span>
-          </li>
-          <li class="nav-btn" onclick="switchTab('exporter')">
-            <span>Asset Exporter</span>
-            <span class="num">07</span>
-          </li>
+          <li class="nav-item active" onclick="goToSlide(0)"><span>01. Overview</span><span class="num">01</span></li>
+          <li class="nav-item" onclick="goToSlide(1)"><span>02. Logo & Crest</span><span class="num">02</span></li>
+          <li class="nav-item" onclick="goToSlide(2)"><span>03. Color Tokens</span><span class="num">03</span></li>
+          <li class="nav-item" onclick="goToSlide(3)"><span>04. Typography</span><span class="num">04</span></li>
+          <li class="nav-item" onclick="goToSlide(4)"><span>05. Tone of Voice</span><span class="num">05</span></li>
+          <li class="nav-item" onclick="goToSlide(5)"><span>06. Art Direction</span><span class="num">06</span></li>
+          <li class="nav-item" onclick="goToSlide(6)"><span>07. Asset Generator</span><span class="num">07</span></li>
         </ul>
       </div>
 
       <div class="sidebar-footer">
-        <strong>Velour Essence System</strong><br>
-        Exact 100vh Screenshot Layout<br>
-        © 2026 All Rights Reserved.
+        <strong>Velour Essence</strong><br>
+        Digital Design Standards v2.0<br>
+        © All Rights Reserved.
       </div>
     </aside>
 
-    <!-- Content Viewport -->
+    <!-- Main Content Area -->
     <main class="viewport">
 
-      <!-- SCREEN 1: OVERVIEW -->
-      <section id="overview" class="screen active">
+      <!-- SLIDE 1: OVERVIEW -->
+      <section class="slide active">
         <div>
-          <span class="kicker">Identity System</span>
-          <h1>Brand Identity Guidelines</h1>
-          <p class="lead">Welcome to the master brand manual for Velour Essence. This design system maintains complete consistency across digital storefronts, marketing campaigns, and luxury packaging globally.</p>
+          <span class="kicker">Brand Architecture</span>
+          <h1>Velour Essence Design System</h1>
+          <p class="lead">Official brand identity standards for Velour Essence. Designed to ensure absolute visual consistency across digital platforms, marketing materials, and packaging.</p>
         </div>
 
         <div class="grid grid-3">
-          <div class="card" onclick="switchTab('logos')" style="cursor:pointer;">
-            <h3>01. Logo & Crest</h3>
-            <p>Clear spacing rules, proportions, dark/light variations, and misuse prevention guidelines.</p>
+          <div class="card" onclick="goToSlide(1)" style="cursor:pointer;">
+            <h3>01. Logo Standards</h3>
+            <p>Emblem proportions, clear space, primary crest, and inverted color usage rules.</p>
           </div>
-          <div class="card" onclick="switchTab('colors')" style="cursor:pointer;">
-            <h3>02. Color Tokens</h3>
-            <p>Interactive swatches with click-to-copy HEX codes for digital and physical production.</p>
+          <div class="card" onclick="goToSlide(2)" style="cursor:pointer;">
+            <h3>02. Color System</h3>
+            <p>Velour Burgundy, Signature Gold, and Silk token palette with 1-click HEX copying.</p>
           </div>
-          <div class="card" onclick="switchTab('typography')" style="cursor:pointer;">
+          <div class="card" onclick="goToSlide(3)" style="cursor:pointer;">
             <h3>03. Typography</h3>
-            <p>Editorial hierarchy featuring Cinzel display headers paired with clean UI sans typography.</p>
+            <p>Cinzel editorial display typography paired with Plus Jakarta Sans body copy.</p>
           </div>
         </div>
 
         <div class="card" style="background: var(--silk); border-color: var(--gold-light);">
-          <h3 style="font-size: 14px;">Screenshot Notice</h3>
-          <p style="font-size: 11.5px;">This entire interface is fixed-height formatted. Every page fits 100% inside your viewport without scrolling so you can take clean screenshots instantly.</p>
+          <h3 style="font-size: 13px;">Fully Responsive System</h3>
+          <p style="font-size: 11px;">Every screen and page section dynamically adapts across desktop, tablet, and mobile displays with zero horizontal scroll errors.</p>
         </div>
       </section>
 
-      <!-- SCREEN 2: LOGO & CREST -->
-      <section id="logos" class="screen">
+      <!-- SLIDE 2: LOGO & CREST -->
+      <section class="slide">
         <div>
-          <span class="kicker">Emblem System</span>
-          <h1>Logo & Crest Standards</h1>
-          <p class="lead">Our emblem fuses classical heraldry with modern luxury refinement. Always preserve the surrounding protective clear zone.</p>
+          <span class="kicker">Emblem Standards</span>
+          <h1>Logo & Crest System</h1>
+          <p class="lead">The brand crest combines classical geometry with luxury aesthetics. Always preserve clear margin space surrounding the emblem.</p>
         </div>
 
         <div class="grid grid-2">
           <div class="crest-box">
             <div class="crest-icon-lg">
-              <svg width="36" height="36" viewBox="0 0 100 100" fill="none">
+              <svg width="34" height="34" viewBox="0 0 100 100" fill="none">
                 <circle cx="50" cy="50" r="46" stroke="#C5A059" stroke-width="3"/>
                 <path d="M34 34L40 41L50 29L60 41L66 34L69 46H31L34 34Z" fill="#C5A059"/>
                 <path d="M32 50H44L50 66L56 50H68L54 74H46L32 50Z" fill="#3D0C13"/>
               </svg>
             </div>
             <div class="crest-title">Primary Crest</div>
-            <div class="crest-sub">Optimized for light cream and white backgrounds</div>
+            <div class="crest-sub">Light surfaces & packaging</div>
           </div>
 
           <div class="crest-box dark">
             <div class="crest-icon-lg">
-              <svg width="36" height="36" viewBox="0 0 100 100" fill="none">
+              <svg width="34" height="34" viewBox="0 0 100 100" fill="none">
                 <circle cx="50" cy="50" r="46" stroke="#C5A059" stroke-width="3"/>
                 <path d="M34 34L40 41L50 29L60 41L66 34L69 46H31L34 34Z" fill="#C5A059"/>
                 <path d="M32 50H44L50 66L56 50H68L54 74H46L32 50Z" fill="#FAF7F2"/>
               </svg>
             </div>
             <div class="crest-title">Inverted Crest</div>
-            <div class="crest-sub">Mandatory for deep Velour Burgundy surfaces</div>
+            <div class="crest-sub">Burgundy & dark backgrounds</div>
           </div>
         </div>
 
         <div class="prohibited-box">
           <h4>⚠️ Prohibited Brand Applications</h4>
           <ul>
-            <li>Never distort, skew, stretch, or alter the geometric proportions of the emblem.</li>
-            <li>Never substitute unauthorized colors or replace Signature Gold with unapproved metallic tones.</li>
-            <li>Never overlay the crest on low-contrast photo backgrounds without a solid backing shield.</li>
-            <li>Never apply unapproved visual filters such as drop shadows, glows, bevels, or heavy gradients.</li>
+            <li>Never alter, stretch, or skew the crest aspect ratio.</li>
+            <li>Never substitute Signature Gold with neon or standard primary yellow.</li>
+            <li>Never overlay the crest on busy or low-contrast photographic patterns.</li>
           </ul>
         </div>
       </section>
 
-      <!-- SCREEN 3: COLOR PALETTE -->
-      <section id="colors" class="screen">
+      <!-- SLIDE 3: COLOR SYSTEM -->
+      <section class="slide">
         <div>
-          <span class="kicker">Palette Tokens</span>
-          <h1>Color System & HEX Codes</h1>
-          <p class="lead">Click any color swatch below to copy its official HEX token directly to your clipboard.</p>
+          <span class="kicker">Color Architecture</span>
+          <h1>Color Tokens</h1>
+          <p class="lead">Click any color card below to instantly copy its HEX code to your clipboard.</p>
         </div>
 
         <div class="grid grid-3">
           <div class="swatch-card" onclick="copyHex('#3D0C13')">
             <div class="swatch-bar" style="background:#3D0C13;"><span class="swatch-hex">#3D0C13</span></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Velour Burgundy</div>
-              <div class="swatch-use">Primary brand color, buttons, headers</div>
-            </div>
+            <div class="swatch-info"><div class="swatch-name">Velour Burgundy</div><div class="swatch-use">Primary accent & buttons</div></div>
           </div>
 
           <div class="swatch-card" onclick="copyHex('#C5A059')">
             <div class="swatch-bar" style="background:#C5A059;"><span class="swatch-hex" style="color:#2A080D; background:rgba(255,255,255,0.7);">#C5A059</span></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Signature Gold</div>
-              <div class="swatch-use">Accents, borders, badges, highlights</div>
-            </div>
+            <div class="swatch-info"><div class="swatch-name">Signature Gold</div><div class="swatch-use">Crest & highlight accents</div></div>
           </div>
 
           <div class="swatch-card" onclick="copyHex('#FAF7F2')">
             <div class="swatch-bar" style="background:#FAF7F2; border-bottom:1px solid var(--line);"><span class="swatch-hex" style="color:#2A2018; background:rgba(0,0,0,0.1);">#FAF7F2</span></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Cream Canvas</div>
-              <div class="swatch-use">Primary page backdrop and containers</div>
-            </div>
+            <div class="swatch-info"><div class="swatch-name">Cream Canvas</div><div class="swatch-use">Main app background</div></div>
           </div>
 
           <div class="swatch-card" onclick="copyHex('#F4EAD8')">
             <div class="swatch-bar" style="background:#F4EAD8;"><span class="swatch-hex" style="color:#2A2018; background:rgba(0,0,0,0.1);">#F4EAD8</span></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Rich Silk</div>
-              <div class="swatch-use">Subtle badges, tags, and table panels</div>
-            </div>
+            <div class="swatch-info"><div class="swatch-name">Rich Silk</div><div class="swatch-use">Subtle cards & highlights</div></div>
           </div>
 
           <div class="swatch-card" onclick="copyHex('#2A2018')">
             <div class="swatch-bar" style="background:#2A2018;"><span class="swatch-hex">#2A2018</span></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Deep Ink</div>
-              <div class="swatch-use">Primary body text and typography</div>
-            </div>
+            <div class="swatch-info"><div class="swatch-name">Deep Ink</div><div class="swatch-use">Primary typography</div></div>
           </div>
 
           <div class="swatch-card" onclick="copyHex('#7A7168')">
             <div class="swatch-bar" style="background:#7A7168;"><span class="swatch-hex">#7A7168</span></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Muted Gray</div>
-              <div class="swatch-use">Secondary text and supporting captions</div>
-            </div>
+            <div class="swatch-info"><div class="swatch-name">Muted Gray</div><div class="swatch-use">Secondary copy & borders</div></div>
           </div>
         </div>
       </section>
 
-      <!-- SCREEN 4: TYPOGRAPHY -->
-      <section id="typography" class="screen">
+      <!-- SLIDE 4: TYPOGRAPHY -->
+      <section class="slide">
         <div>
-          <span class="kicker">Typographic Hierarchy</span>
+          <span class="kicker">Typography Hierarchy</span>
           <h1>Typeface Standards</h1>
-          <p class="lead">Our dual-font typographic architecture balances editorial luxury with digital clarity.</p>
+          <p class="lead">Our typography pairs high-end luxury serif displays with ultra-clean modern sans-serif body type.</p>
         </div>
 
         <div class="grid grid-2">
           <div class="type-specimen">
-            <div class="type-tag">Primary Display / Editorial</div>
+            <div class="type-tag">Primary Display Serif</div>
             <div class="type-heading serif">Cinzel Display</div>
-            <p style="font-size: 12.5px; color: var(--gray); line-height: 1.5;">Reserved for section titles, wordmarks, product names, and headline statements. Conveys classical authority and luxury refinement.</p>
+            <p>Utilized for primary titles, luxury banners, section titles, and product logos.</p>
           </div>
 
           <div class="type-specimen">
-            <div class="type-tag">UI & Body Copy</div>
+            <div class="type-tag">Body & UI Sans-Serif</div>
             <div class="type-heading sans">Plus Jakarta Sans</div>
-            <p style="font-size: 12.5px; color: var(--gray); line-height: 1.5;">Applied to body paragraphs, button labels, navigation menus, and form fields. Guarantees modern legibility across all screen viewports.</p>
+            <p>Utilized for paragraphs, nav menus, buttons, and high-readability body copy.</p>
           </div>
         </div>
 
         <div class="card" style="padding: 16px;">
-          <h3 style="font-size: 13px;">Hierarchy Guidance</h3>
-          <p style="font-size: 11.5px;">Titles use Cinzel Bold with +0.5px letter spacing. Paragraph body text uses Plus Jakarta Sans Regular with a 1.5 line height ratio.</p>
+          <h3 style="font-size: 13px;">Hierarchy Guidelines</h3>
+          <p style="font-size: 11px;">Headings use Cinzel Bold. Paragraphs use Plus Jakarta Sans Regular with 1.5 line height for maximum legibility.</p>
         </div>
       </section>
 
-      <!-- SCREEN 5: TONE OF VOICE -->
-      <section id="tone" class="screen">
+      <!-- SLIDE 5: TONE OF VOICE -->
+      <section class="slide">
         <div>
-          <span class="kicker">Communication Standards</span>
-          <h1>Tone & Editorial Voice</h1>
-          <p class="lead">Velour Essence communicates with quiet authority, warmth, and transparent luxury.</p>
+          <span class="kicker">Brand Voice</span>
+          <h1>Tone of Voice</h1>
+          <p class="lead">Velour Essence communicates with quiet authority, clarity, and refined warmth.</p>
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 10px;">
           <div class="tone-card do">
             <span class="tone-badge">DO</span>
-            <div>"Master-blended fine fragrances inspired by legendary notes, crafted and delivered without traditional retail markups."</div>
+            <div>"Master-blended fine fragrances crafted with rare notes and delivered directly to your doorstep."</div>
           </div>
           <div class="tone-card dont">
             <span class="tone-badge">DON'T</span>
-            <div>"Buy our super cheap designer knockoffs right now before they sell out!!"</div>
+            <div>"Buy cheap designer knockoffs now before our limited stock runs out!!"</div>
           </div>
           <div class="tone-card do">
             <span class="tone-badge">DO</span>
-            <div>"Every bottle includes a risk-free 2ml test sample so you can verify your signature scent before opening."</div>
+            <div>"Every order includes a complimentary 2ml sample vial so you can experience the scent before unsealing."</div>
           </div>
           <div class="tone-card dont">
             <span class="tone-badge">DON'T</span>
-            <div>"No refunds, returns, or exchanges under any circumstances after purchase."</div>
+            <div>"No refunds, returns, or exchanges allowed under any circumstances."</div>
           </div>
         </div>
       </section>
 
-      <!-- SCREEN 6: ART DIRECTION -->
-      <section id="imagery" class="screen">
+      <!-- SLIDE 6: ART DIRECTION -->
+      <section class="slide">
         <div>
-          <span class="kicker">Visual Identity</span>
+          <span class="kicker">Visual Direction</span>
           <h1>Art Direction & Imagery</h1>
-          <p class="lead">Visual collateral must always evoke warmth, tactile texture, and minimalist luxury.</p>
+          <p class="lead">All imagery must convey natural warmth, tactile luxury, and simple elegance.</p>
         </div>
 
         <div class="grid grid-2">
           <div class="card">
             <h3>Lighting & Atmosphere</h3>
-            <p>Utilize soft, diffused lighting mimicking natural morning sunlight or warm golden hour tones. Avoid harsh artificial flashes or saturated color casts.</p>
+            <p>Soft, warm natural lighting mimicking golden hour sunlight. Avoid cold, direct flash photography.</p>
           </div>
           <div class="card">
-            <h3>Background & Composition</h3>
-            <p>Incorporate clean architectural surfaces, neutral cream gradients, or rich silk textures (#F4EAD8). Maintain generous white space around all product shots.</p>
+            <h3>Background Materials</h3>
+            <p>Utilize natural silk fabrics (#F4EAD8), matte micro-cement, or dark burgundy velvet surfaces.</p>
           </div>
         </div>
 
-        <div class="card" style="background: var(--silk); border-color: var(--gold-light);">
-          <h3 style="font-size: 13.5px;">Product Presentation Rule</h3>
-          <p style="font-size: 11.5px;">Keep flacons centered with a minimum of 20% clear margin surrounding the item in all social and print crops.</p>
+        <div class="card" style="background: var(--silk); border-color: var(--gold-light); padding: 14px 18px;">
+          <h3 style="font-size: 13px;">Framing Standard</h3>
+          <p style="font-size: 11px;">Maintain a minimum of 20% clear space surrounding fragrance bottles in all marketing materials.</p>
         </div>
       </section>
 
-      <!-- SCREEN 7: ASSET EXPORTER -->
-      <section id="exporter" class="screen">
+      <!-- SLIDE 7: ASSET GENERATOR -->
+      <section class="slide">
         <div>
-          <span class="kicker">Utility System</span>
-          <h1>Brand Asset Generator</h1>
-          <p class="lead">Generate standardized, brand-compliant UI cards directly inside the brand manual.</p>
+          <span class="kicker">Interactive Utility</span>
+          <h1>Brand Card Generator</h1>
+          <p class="lead">Generate brand-compliant asset cards dynamically inside your workspace.</p>
         </div>
 
         <div class="grid grid-2">
-          <div class="exporter-card">
-            <div class="form-group">
-              <label>Asset Headline</label>
-              <input type="text" id="assetTitle" class="form-control" value="Velour No. 5 Parfum" oninput="updatePreview()">
+          <div class="card">
+            <div class="input-group">
+              <label for="assetTitle">Headline Title</label>
+              <input type="text" id="assetTitle" value="Velour No. 5 Parfum" oninput="updatePreview()">
             </div>
-            <div class="form-group">
-              <label>Asset Subtext</label>
-              <input type="text" id="assetDesc" class="form-control" value="Master-blended fine fragrance in dark glass." oninput="updatePreview()">
+            <div class="input-group">
+              <label for="assetDesc">Description Text</label>
+              <input type="text" id="assetDesc" value="Master-blended fine fragrance in dark glass." oninput="updatePreview()">
             </div>
-            <button class="btn" onclick="triggerExport()">Export Token Card</button>
+            <button class="nav-btn-cmd" style="width:100%; margin-top:8px;" onclick="copyHex('Card Design Generated!')">Copy Token Spec</button>
           </div>
 
-          <div class="card" id="previewCard" style="background: var(--burgundy); color: #fff; border-color: var(--gold); display: flex; flex-direction: column; justify-content: center; text-align: center; padding: 24px;">
+          <div class="card" id="previewCard" style="background: var(--burgundy); color: #ffffff; border-color: var(--gold); display: flex; flex-direction: column; justify-content: center; text-align: center; padding: 20px;">
             <div class="crest-logo" style="margin: 0 auto 10px;">
               <svg width="20" height="20" viewBox="0 0 100 100" fill="none">
                 <circle cx="50" cy="50" r="46" stroke="#C5A059" stroke-width="3"/>
                 <path d="M34 34L40 41L50 29L60 41L66 34L69 46H31L34 34Z" fill="#C5A059"/>
               </svg>
             </div>
-            <h3 id="prevTitle" style="color: #fff; font-size: 16px; margin-bottom: 4px;">Velour No. 5 Parfum</h3>
-            <p id="prevDesc" style="color: var(--gold-light); font-size: 11.5px;">Master-blended fine fragrance in dark glass.</p>
+            <h3 id="prevTitle" style="color: #ffffff; font-size: 16px; margin-bottom: 4px;">Velour No. 5 Parfum</h3>
+            <p id="prevDesc" style="color: var(--gold-light); font-size: 11px;">Master-blended fine fragrance in dark glass.</p>
           </div>
         </div>
       </section>
+
+      <!-- Page Nav Footer Controls -->
+      <footer class="controls-bar">
+        <button class="nav-btn-cmd" onclick="prevSlide()">← Previous</button>
+        <span class="page-indicator" id="pageIndicator">Page 01 / 07</span>
+        <button class="nav-btn-cmd" onclick="nextSlide()">Next →</button>
+      </footer>
 
     </main>
   </div>
 </div>
 
-<!-- Notification Toast -->
-<div class="toast" id="toast">Copied HEX code!</div>
+<!-- Toast Popup -->
+<div class="toast" id="toast">Copied to clipboard!</div>
 
 <script>
-  function switchTab(tabId) {
-    document.querySelectorAll('.nav-btn').forEach(btn => {
-      btn.classList.remove('active');
-    });
-    const activeNav = Array.from(document.querySelectorAll('.nav-btn')).find(el => el.getAttribute('onclick').includes(tabId));
-    if(activeNav) activeNav.classList.add('active');
+  let currentSlide = 0;
+  const totalSlides = 7;
 
-    document.querySelectorAll('.screen').forEach(s => {
-      s.classList.remove('active');
+  function updateSlideDisplay() {
+    const slides = document.querySelectorAll('.slide');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    slides.forEach((s, i) => {
+      s.classList.toggle('active', i === currentSlide);
     });
-    const targetScreen = document.getElementById(tabId);
-    if(targetScreen) targetScreen.classList.add('active');
+
+    navItems.forEach((n, i) => {
+      n.classList.toggle('active', i === currentSlide);
+    });
+
+    document.getElementById('pageIndicator').textContent = `Page 0${currentSlide + 1} / 0${totalSlides}`;
+    
+    // Close mobile menu when nav item clicked
+    document.getElementById('sidebar').classList.remove('open');
   }
 
-  function copyHex(hexCode) {
-    navigator.clipboard.writeText(hexCode);
-    showToast(`Copied ${hexCode} to clipboard!`);
+  function goToSlide(index) {
+    currentSlide = index;
+    updateSlideDisplay();
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateSlideDisplay();
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateSlideDisplay();
+  }
+
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+  }
+
+  function copyHex(text) {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+    }
+    showToast(`Copied: ${text}`);
   }
 
   function showToast(msg) {
@@ -848,20 +883,14 @@
     t.textContent = msg;
     t.classList.add('show');
     clearTimeout(window._toastTimer);
-    window._toastTimer = setTimeout(() => {
-      t.classList.remove('show');
-    }, 2000);
+    window._toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
   }
 
   function updatePreview() {
-    const title = document.getElementById('assetTitle').value;
-    const desc = document.getElementById('assetDesc').value;
-    document.getElementById('prevTitle').textContent = title || 'Asset Title';
-    document.getElementById('prevDesc').textContent = desc || 'Asset Description';
-  }
-
-  function triggerExport() {
-    showToast('Brand Asset Token Generated!');
+    const titleVal = document.getElementById('assetTitle').value;
+    const descVal = document.getElementById('assetDesc').value;
+    document.getElementById('prevTitle').textContent = titleVal || 'Asset Title';
+    document.getElementById('prevDesc').textContent = descVal || 'Asset Description';
   }
 </script>
 </body>
