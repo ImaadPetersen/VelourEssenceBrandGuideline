@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Velour Essence — Brand Guidelines & Design System</title>
+<title>Velour Essence — Official Brand Guidelines & Design System</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -23,10 +23,10 @@
     --green-text: #1E6B33;
     --red-bg: #FBEAEA;
     --red-text: #B3261E;
-    --sidebar-width: 260px;
+    --sidebar-width: 280px;
+    --header-height: 52px;
   }
 
-  /* Core Reset */
   *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -43,7 +43,6 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* App Outer Shell */
   .app-frame {
     display: flex;
     flex-direction: column;
@@ -54,7 +53,7 @@
 
   /* Top Bar Header */
   .top-bar {
-    height: 44px;
+    height: var(--header-height);
     background: linear-gradient(90deg, #1A0508 0%, var(--burgundy) 50%, #1A0508 100%);
     color: var(--gold-light);
     font-size: 11px;
@@ -64,21 +63,32 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 24px;
     border-bottom: 1px solid rgba(197, 160, 89, 0.3);
     position: sticky;
     top: 0;
     z-index: 50;
   }
 
+  .top-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
   .mobile-toggle {
     display: none;
     background: transparent;
-    border: none;
+    border: 1px solid rgba(197, 160, 89, 0.4);
+    border-radius: 4px;
     color: var(--gold-light);
-    font-size: 20px;
+    font-size: 16px;
     cursor: pointer;
-    padding: 4px;
+    padding: 6px 10px;
+    transition: background 0.2s;
+  }
+  .mobile-toggle:hover {
+    background: rgba(197, 160, 89, 0.15);
   }
 
   /* App Body Wrapper */
@@ -99,8 +109,12 @@
     flex-direction: column;
     justify-content: space-between;
     flex-shrink: 0;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 40;
+    height: calc(100vh - var(--header-height));
+    position: sticky;
+    top: var(--header-height);
+    overflow-y: auto;
   }
 
   .brand-header {
@@ -112,8 +126,8 @@
   }
 
   .crest-logo {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     border: 2px solid var(--gold);
     display: flex;
@@ -127,14 +141,14 @@
   .brand-title .wordmark {
     font-family: 'Cinzel', serif;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 13px;
     color: var(--burgundy);
     line-height: 1.2;
     letter-spacing: 0.5px;
   }
 
   .brand-title .tagline {
-    font-size: 9px;
+    font-size: 8.5px;
     letter-spacing: 1.2px;
     color: var(--gold-dark);
     font-weight: 700;
@@ -145,15 +159,15 @@
   .nav-menu {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
     list-style: none;
     margin-top: 16px;
   }
 
   .nav-item {
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-size: 12px;
+    padding: 9px 12px;
+    border-radius: 6px;
+    font-size: 11.5px;
     font-weight: 600;
     color: var(--gray);
     cursor: pointer;
@@ -171,11 +185,11 @@
   .nav-item.active {
     background: var(--burgundy);
     color: #ffffff;
-    box-shadow: 0 4px 12px rgba(61, 12, 19, 0.25);
+    box-shadow: 0 4px 12px rgba(61, 12, 19, 0.2);
   }
 
   .nav-item .num {
-    font-size: 10px;
+    font-size: 9.5px;
     opacity: 0.7;
     font-family: 'Cinzel', serif;
   }
@@ -191,7 +205,7 @@
   /* Main Viewport Content */
   .viewport {
     flex: 1;
-    padding: 32px 40px;
+    padding: 36px 48px;
     background: var(--cream);
     display: flex;
     flex-direction: column;
@@ -223,8 +237,8 @@
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 1.5px;
-    padding: 4px 12px;
-    border-radius: 12px;
+    padding: 4px 10px;
+    border-radius: 10px;
     text-transform: uppercase;
     margin-bottom: 8px;
   }
@@ -232,7 +246,7 @@
   h1 {
     font-family: 'Cinzel', serif;
     color: var(--burgundy);
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 6px;
@@ -242,13 +256,14 @@
     color: var(--gray);
     font-size: 13px;
     line-height: 1.6;
-    max-width: 800px;
+    max-width: 840px;
   }
 
   /* Grids & Cards */
   .grid { display: grid; gap: 16px; width: 100%; }
   .grid-2 { grid-template-columns: repeat(2, 1fr); }
   .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
 
   .card {
     background: #ffffff;
@@ -265,13 +280,13 @@
   .card h3 {
     font-family: 'Cinzel', serif;
     color: var(--burgundy);
-    font-size: 15px;
+    font-size: 14.5px;
     margin-bottom: 6px;
   }
 
   .card p {
     color: var(--gray);
-    font-size: 12px;
+    font-size: 11.5px;
     line-height: 1.5;
   }
 
@@ -291,8 +306,8 @@
   }
 
   .crest-icon-lg {
-    width: 60px;
-    height: 60px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     border: 2px solid var(--gold);
     display: flex;
@@ -304,7 +319,7 @@
 
   .crest-title {
     font-family: 'Cinzel', serif;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
     color: var(--burgundy);
   }
@@ -323,14 +338,14 @@
   .prohibited-box h4 {
     color: var(--red-text);
     font-family: 'Cinzel', serif;
-    font-size: 14px;
+    font-size: 13.5px;
     margin-bottom: 6px;
   }
 
   .prohibited-box ul {
     margin-left: 18px;
     color: var(--red-text);
-    font-size: 12px;
+    font-size: 11.5px;
     line-height: 1.6;
   }
 
@@ -341,32 +356,33 @@
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
 
   .swatch-card:hover {
     transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
   }
 
   .swatch-bar {
-    height: 64px;
+    height: 56px;
     padding: 8px;
     display: flex;
     align-items: flex-end;
   }
 
   .swatch-hex {
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.45);
     color: #ffffff;
-    font-size: 10px;
+    font-size: 9.5px;
     font-weight: 700;
-    padding: 3px 8px;
+    padding: 3px 7px;
     border-radius: 4px;
     letter-spacing: 0.5px;
   }
 
   .swatch-info { padding: 12px; }
-  .swatch-name { font-weight: 700; font-size: 13px; color: var(--ink); }
+  .swatch-name { font-weight: 700; font-size: 12.5px; color: var(--ink); }
   .swatch-use { font-size: 11px; color: var(--gray); margin-top: 2px; }
 
   /* Typography Specimen */
@@ -378,7 +394,7 @@
   }
 
   .type-tag {
-    font-size: 10px;
+    font-size: 9.5px;
     letter-spacing: 1.2px;
     text-transform: uppercase;
     color: var(--gold-dark);
@@ -387,7 +403,7 @@
   }
 
   .type-heading {
-    font-size: 22px;
+    font-size: 20px;
     color: var(--burgundy);
     margin-bottom: 6px;
     line-height: 1.2;
@@ -400,7 +416,7 @@
   .tone-card {
     padding: 14px 18px;
     border-radius: 8px;
-    font-size: 12px;
+    font-size: 11.5px;
     line-height: 1.5;
     display: flex;
     gap: 12px;
@@ -411,7 +427,7 @@
   .tone-card.dont { background: var(--red-bg); color: var(--red-text); border: 1px solid rgba(179,38,30,0.25); }
 
   .tone-badge {
-    font-size: 9.5px;
+    font-size: 9px;
     text-transform: uppercase;
     padding: 3px 8px;
     border-radius: 4px;
@@ -429,14 +445,14 @@
 
   .input-group label {
     display: block;
-    font-size: 10px;
+    font-size: 9.5px;
     font-weight: 700;
     text-transform: uppercase;
     color: var(--gray);
     margin-bottom: 4px;
   }
 
-  .input-group input {
+  .input-group input, .input-group select {
     width: 100%;
     padding: 10px 12px;
     border: 1px solid var(--line);
@@ -444,9 +460,11 @@
     font-size: 12px;
     font-family: inherit;
     outline: none;
+    background: #ffffff;
+    color: var(--ink);
   }
 
-  .input-group input:focus {
+  .input-group input:focus, .input-group select:focus {
     border-color: var(--gold);
   }
 
@@ -464,7 +482,7 @@
     background: var(--burgundy);
     color: #ffffff;
     border: 1px solid var(--burgundy);
-    padding: 10px 20px;
+    padding: 10px 18px;
     border-radius: 6px;
     font-size: 11px;
     font-weight: 700;
@@ -480,7 +498,7 @@
   }
 
   .page-indicator {
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 700;
     color: var(--gray);
   }
@@ -495,7 +513,7 @@
     color: #ffffff;
     padding: 10px 24px;
     border-radius: 30px;
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 600;
     border: 1px solid var(--gold);
     opacity: 0;
@@ -510,14 +528,14 @@
   }
 
   /* Responsive Media Queries */
-  @media (max-width: 820px) {
-    .mobile-toggle { display: block; }
+  @media (max-width: 900px) {
+    .mobile-toggle { display: flex; align-items: center; }
     
     .sidebar {
-      position: absolute;
-      top: 0;
+      position: fixed;
+      top: var(--header-height);
       left: 0;
-      height: 100%;
+      height: calc(100vh - var(--header-height));
       transform: translateX(-100%);
       box-shadow: 10px 0 30px rgba(0,0,0,0.2);
     }
@@ -530,7 +548,7 @@
       padding: 20px 16px;
     }
 
-    .grid-2, .grid-3 {
+    .grid-2, .grid-3, .grid-4 {
       grid-template-columns: 1fr;
     }
 
@@ -543,9 +561,11 @@
 <div class="app-frame">
   <!-- Top Bar Nav -->
   <header class="top-bar">
-    <button class="mobile-toggle" onclick="toggleSidebar()" aria-label="Toggle Menu">☰</button>
-    <span>Velour Essence — Brand Guidelines</span>
-    <span>GitHub Pages Ready</span>
+    <div class="top-bar-left">
+      <button class="mobile-toggle" onclick="toggleSidebar()" aria-label="Toggle Menu">☰ Menu</button>
+      <span>Velour Essence — Official Brand Manual</span>
+    </div>
+    <span>Production v2.4</span>
   </header>
 
   <div class="app-body">
@@ -554,7 +574,7 @@
       <div>
         <div class="brand-header">
           <div class="crest-logo">
-            <svg width="22" height="22" viewBox="0 0 100 100" fill="none">
+            <svg width="20" height="20" viewBox="0 0 100 100" fill="none">
               <circle cx="50" cy="50" r="46" stroke="#C5A059" stroke-width="3"/>
               <path d="M34 34L40 41L50 29L60 41L66 34L69 46H31L34 34Z" fill="#C5A059"/>
               <path d="M32 50H44L50 66L56 50H68L54 74H46L32 50Z" fill="#3D0C13"/>
@@ -562,25 +582,28 @@
           </div>
           <div class="brand-title">
             <div class="wordmark">VELOUR ESSENCE</div>
-            <div class="tagline">Brand Guidelines</div>
+            <div class="tagline">Design System</div>
           </div>
         </div>
 
         <ul class="nav-menu">
-          <li class="nav-item active" onclick="goToSlide(0)"><span>01. Overview</span><span class="num">01</span></li>
-          <li class="nav-item" onclick="goToSlide(1)"><span>02. Logo & Crest</span><span class="num">02</span></li>
-          <li class="nav-item" onclick="goToSlide(2)"><span>03. Color Tokens</span><span class="num">03</span></li>
-          <li class="nav-item" onclick="goToSlide(3)"><span>04. Typography</span><span class="num">04</span></li>
+          <li class="nav-item active" onclick="goToSlide(0)"><span>01. System Overview</span><span class="num">01</span></li>
+          <li class="nav-item" onclick="goToSlide(1)"><span>02. Logo & Crest Specs</span><span class="num">02</span></li>
+          <li class="nav-item" onclick="goToSlide(2)"><span>03. Color Architecture</span><span class="num">03</span></li>
+          <li class="nav-item" onclick="goToSlide(3)"><span>04. Typography & Scale</span><span class="num">04</span></li>
           <li class="nav-item" onclick="goToSlide(4)"><span>05. Tone of Voice</span><span class="num">05</span></li>
           <li class="nav-item" onclick="goToSlide(5)"><span>06. Art Direction</span><span class="num">06</span></li>
-          <li class="nav-item" onclick="goToSlide(6)"><span>07. Asset Generator</span><span class="num">07</span></li>
+          <li class="nav-item" onclick="goToSlide(6)"><span>07. Spacing & Grids</span><span class="num">07</span></li>
+          <li class="nav-item" onclick="goToSlide(7)"><span>08. UI Component Kit</span><span class="num">08</span></li>
+          <li class="nav-item" onclick="goToSlide(8)"><span>09. Asset Generator</span><span class="num">09</span></li>
+          <li class="nav-item" onclick="goToSlide(9)"><span>10. Export & Resources</span><span class="num">10</span></li>
         </ul>
       </div>
 
       <div class="sidebar-footer">
-        <strong>Velour Essence</strong><br>
-        Digital Design Standards v2.0<br>
-        © All Rights Reserved.
+        <strong>Velour Essence Group</strong><br>
+        Global Brand Guidelines<br>
+        Authorized Personnel Only.
       </div>
     </aside>
 
@@ -590,72 +613,72 @@
       <!-- SLIDE 1: OVERVIEW -->
       <section class="slide active">
         <div>
-          <span class="kicker">Brand Architecture</span>
+          <span class="kicker">Core Identity</span>
           <h1>Velour Essence Design System</h1>
-          <p class="lead">Official brand identity standards for Velour Essence. Designed to ensure absolute visual consistency across digital platforms, marketing materials, and packaging.</p>
+          <p class="lead">Official brand standards governing visual execution, tone, digital components, and packaging across international touchpoints.</p>
         </div>
 
         <div class="grid grid-3">
           <div class="card" onclick="goToSlide(1)" style="cursor:pointer;">
             <h3>01. Logo Standards</h3>
-            <p>Emblem proportions, clear space, primary crest, and inverted color usage rules.</p>
+            <p>Emblem proportions, minimum scaling sizes, and clear-space containment boxes.</p>
           </div>
           <div class="card" onclick="goToSlide(2)" style="cursor:pointer;">
-            <h3>02. Color System</h3>
-            <p>Velour Burgundy, Signature Gold, and Silk token palette with 1-click HEX copying.</p>
+            <h3>02. Color Tokens</h3>
+            <p>Core palette breakdown featuring Burgundy, Signature Gold, and contrast codes.</p>
           </div>
           <div class="card" onclick="goToSlide(3)" style="cursor:pointer;">
             <h3>03. Typography</h3>
-            <p>Cinzel editorial display typography paired with Plus Jakarta Sans body copy.</p>
+            <p>Cinzel editorial headings paired with Plus Jakarta Sans interface body copy.</p>
           </div>
         </div>
 
         <div class="card" style="background: var(--silk); border-color: var(--gold-light);">
-          <h3 style="font-size: 13px;">Fully Responsive System</h3>
-          <p style="font-size: 11px;">Every screen and page section dynamically adapts across desktop, tablet, and mobile displays with zero horizontal scroll errors.</p>
+          <h3 style="font-size: 12.5px;">Universal Compatibility</h3>
+          <p style="font-size: 11px;">Engineered with strict responsive parameters ensuring complete integrity on desktop displays, tablets, and high-density mobile screens.</p>
         </div>
       </section>
 
       <!-- SLIDE 2: LOGO & CREST -->
       <section class="slide">
         <div>
-          <span class="kicker">Emblem Standards</span>
+          <span class="kicker">Emblem Framework</span>
           <h1>Logo & Crest System</h1>
-          <p class="lead">The brand crest combines classical geometry with luxury aesthetics. Always preserve clear margin space surrounding the emblem.</p>
+          <p class="lead">The brand mark merges classical heraldic geometry with luxury modern minimalism. Never modify proportions manually.</p>
         </div>
 
         <div class="grid grid-2">
           <div class="crest-box">
             <div class="crest-icon-lg">
-              <svg width="34" height="34" viewBox="0 0 100 100" fill="none">
+              <svg width="32" height="32" viewBox="0 0 100 100" fill="none">
                 <circle cx="50" cy="50" r="46" stroke="#C5A059" stroke-width="3"/>
                 <path d="M34 34L40 41L50 29L60 41L66 34L69 46H31L34 34Z" fill="#C5A059"/>
                 <path d="M32 50H44L50 66L56 50H68L54 74H46L32 50Z" fill="#3D0C13"/>
               </svg>
             </div>
             <div class="crest-title">Primary Crest</div>
-            <div class="crest-sub">Light surfaces & packaging</div>
+            <div class="crest-sub">Optimized for light surfaces & white packaging</div>
           </div>
 
           <div class="crest-box dark">
             <div class="crest-icon-lg">
-              <svg width="34" height="34" viewBox="0 0 100 100" fill="none">
+              <svg width="32" height="32" viewBox="0 0 100 100" fill="none">
                 <circle cx="50" cy="50" r="46" stroke="#C5A059" stroke-width="3"/>
                 <path d="M34 34L40 41L50 29L60 41L66 34L69 46H31L34 34Z" fill="#C5A059"/>
                 <path d="M32 50H44L50 66L56 50H68L54 74H46L32 50Z" fill="#FAF7F2"/>
               </svg>
             </div>
             <div class="crest-title">Inverted Crest</div>
-            <div class="crest-sub">Burgundy & dark backgrounds</div>
+            <div class="crest-sub">Optimized for Burgundy & dark backgrounds</div>
           </div>
         </div>
 
         <div class="prohibited-box">
           <h4>⚠️ Prohibited Brand Applications</h4>
           <ul>
-            <li>Never alter, stretch, or skew the crest aspect ratio.</li>
-            <li>Never substitute Signature Gold with neon or standard primary yellow.</li>
-            <li>Never overlay the crest on busy or low-contrast photographic patterns.</li>
+            <li>Never alter, stretch, skew, or rotate the crest aspect ratio.</li>
+            <li>Never substitute Signature Gold with standard yellow or digital gradients.</li>
+            <li>Never overlay the mark on low-contrast patterned photography without a solid matte backing.</li>
           </ul>
         </div>
       </section>
@@ -663,40 +686,40 @@
       <!-- SLIDE 3: COLOR SYSTEM -->
       <section class="slide">
         <div>
-          <span class="kicker">Color Architecture</span>
+          <span class="kicker">Color Palette</span>
           <h1>Color Tokens</h1>
-          <p class="lead">Click any color card below to instantly copy its HEX code to your clipboard.</p>
+          <p class="lead">Click any color card below to instantly copy its HEX code to your device clipboard.</p>
         </div>
 
         <div class="grid grid-3">
           <div class="swatch-card" onclick="copyHex('#3D0C13')">
             <div class="swatch-bar" style="background:#3D0C13;"><span class="swatch-hex">#3D0C13</span></div>
-            <div class="swatch-info"><div class="swatch-name">Velour Burgundy</div><div class="swatch-use">Primary accent & buttons</div></div>
+            <div class="swatch-info"><div class="swatch-name">Velour Burgundy</div><div class="swatch-use">Primary brand accent & headers</div></div>
           </div>
 
           <div class="swatch-card" onclick="copyHex('#C5A059')">
             <div class="swatch-bar" style="background:#C5A059;"><span class="swatch-hex" style="color:#2A080D; background:rgba(255,255,255,0.7);">#C5A059</span></div>
-            <div class="swatch-info"><div class="swatch-name">Signature Gold</div><div class="swatch-use">Crest & highlight accents</div></div>
+            <div class="swatch-info"><div class="swatch-name">Signature Gold</div><div class="swatch-use">Crest geometry & luxury borders</div></div>
           </div>
 
           <div class="swatch-card" onclick="copyHex('#FAF7F2')">
-            <div class="swatch-bar" style="background:#FAF7F2; border-bottom:1px solid var(--line);"><span class="swatch-hex" style="color:#2A2018; background:rgba(0,0,0,0.1);">#FAF7F2</span></div>
-            <div class="swatch-info"><div class="swatch-name">Cream Canvas</div><div class="swatch-use">Main app background</div></div>
+            <div class="swatch-bar" style="background:#FAF7F2; border-bottom:1px solid var(--line);"><span class="swatch-hex" style="color:#2A2018; background:rgba(0,0,0,0.08);">#FAF7F2</span></div>
+            <div class="swatch-info"><div class="swatch-name">Cream Canvas</div><div class="swatch-use">Primary app background</div></div>
           </div>
 
           <div class="swatch-card" onclick="copyHex('#F4EAD8')">
-            <div class="swatch-bar" style="background:#F4EAD8;"><span class="swatch-hex" style="color:#2A2018; background:rgba(0,0,0,0.1);">#F4EAD8</span></div>
-            <div class="swatch-info"><div class="swatch-name">Rich Silk</div><div class="swatch-use">Subtle cards & highlights</div></div>
+            <div class="swatch-bar" style="background:#F4EAD8;"><span class="swatch-hex" style="color:#2A2018; background:rgba(0,0,0,0.08);">#F4EAD8</span></div>
+            <div class="swatch-info"><div class="swatch-name">Rich Silk</div><div class="swatch-use">Card fills & subtle highlights</div></div>
           </div>
 
           <div class="swatch-card" onclick="copyHex('#2A2018')">
             <div class="swatch-bar" style="background:#2A2018;"><span class="swatch-hex">#2A2018</span></div>
-            <div class="swatch-info"><div class="swatch-name">Deep Ink</div><div class="swatch-use">Primary typography</div></div>
+            <div class="swatch-info"><div class="swatch-name">Deep Ink</div><div class="swatch-use">Primary reading copy</div></div>
           </div>
 
           <div class="swatch-card" onclick="copyHex('#7A7168')">
             <div class="swatch-bar" style="background:#7A7168;"><span class="swatch-hex">#7A7168</span></div>
-            <div class="swatch-info"><div class="swatch-name">Muted Gray</div><div class="swatch-use">Secondary copy & borders</div></div>
+            <div class="swatch-info"><div class="swatch-name">Muted Gray</div><div class="swatch-use">Secondary metadata & borders</div></div>
           </div>
         </div>
       </section>
@@ -706,41 +729,41 @@
         <div>
           <span class="kicker">Typography Hierarchy</span>
           <h1>Typeface Standards</h1>
-          <p class="lead">Our typography pairs high-end luxury serif displays with ultra-clean modern sans-serif body type.</p>
+          <p class="lead">Our typography pairs high-end luxury serif displays with ultra-clean modern sans-serif interface text.</p>
         </div>
 
         <div class="grid grid-2">
           <div class="type-specimen">
             <div class="type-tag">Primary Display Serif</div>
             <div class="type-heading serif">Cinzel Display</div>
-            <p>Utilized for primary titles, luxury banners, section titles, and product logos.</p>
+            <p>Utilized exclusively for primary titles, luxury banners, section headers, and product naming badges.</p>
           </div>
 
           <div class="type-specimen">
             <div class="type-tag">Body & UI Sans-Serif</div>
             <div class="type-heading sans">Plus Jakarta Sans</div>
-            <p>Utilized for paragraphs, nav menus, buttons, and high-readability body copy.</p>
+            <p>Utilized for paragraphs, navigation menus, button labels, and high-density technical data.</p>
           </div>
         </div>
 
         <div class="card" style="padding: 16px;">
-          <h3 style="font-size: 13px;">Hierarchy Guidelines</h3>
-          <p style="font-size: 11px;">Headings use Cinzel Bold. Paragraphs use Plus Jakarta Sans Regular with 1.5 line height for maximum legibility.</p>
+          <h3 style="font-size: 12.5px;">Scale & Leading Rule</h3>
+          <p style="font-size: 11px;">Headings implement strict tracking with Cinzel Bold. Body text requires Plus Jakarta Sans Regular with a minimum 1.5 line height ratio.</p>
         </div>
       </section>
 
       <!-- SLIDE 5: TONE OF VOICE -->
       <section class="slide">
         <div>
-          <span class="kicker">Brand Voice</span>
+          <span class="kicker">Editorial Copywriting</span>
           <h1>Tone of Voice</h1>
-          <p class="lead">Velour Essence communicates with quiet authority, clarity, and refined warmth.</p>
+          <p class="lead">Velour Essence communicates with quiet authority, clarity, transparency, and refined warmth.</p>
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 10px;">
           <div class="tone-card do">
             <span class="tone-badge">DO</span>
-            <div>"Master-blended fine fragrances crafted with rare notes and delivered directly to your doorstep."</div>
+            <div>"Master-blended fine fragrances crafted with rare botanical notes and delivered directly to your doorstep."</div>
           </div>
           <div class="tone-card dont">
             <span class="tone-badge">DON'T</span>
@@ -752,7 +775,7 @@
           </div>
           <div class="tone-card dont">
             <span class="tone-badge">DON'T</span>
-            <div>"No refunds, returns, or exchanges allowed under any circumstances."</div>
+            <div>"No refunds, returns, or exchanges allowed under any circumstances whatsoever."</div>
           </div>
         </div>
       </section>
@@ -762,32 +785,82 @@
         <div>
           <span class="kicker">Visual Direction</span>
           <h1>Art Direction & Imagery</h1>
-          <p class="lead">All imagery must convey natural warmth, tactile luxury, and simple elegance.</p>
+          <p class="lead">All photographic and digital imagery must convey natural warmth, tactile luxury, and structural simplicity.</p>
         </div>
 
         <div class="grid grid-2">
           <div class="card">
             <h3>Lighting & Atmosphere</h3>
-            <p>Soft, warm natural lighting mimicking golden hour sunlight. Avoid cold, direct flash photography.</p>
+            <p>Soft, warm natural lighting mimicking golden hour sunlight. Avoid cold, direct studio flash photography.</p>
           </div>
           <div class="card">
             <h3>Background Materials</h3>
-            <p>Utilize natural silk fabrics (#F4EAD8), matte micro-cement, or dark burgundy velvet surfaces.</p>
+            <p>Utilize natural silk fabrics (#F4EAD8), matte micro-cement textures, or dark burgundy velvet surfaces.</p>
           </div>
         </div>
 
         <div class="card" style="background: var(--silk); border-color: var(--gold-light); padding: 14px 18px;">
-          <h3 style="font-size: 13px;">Framing Standard</h3>
-          <p style="font-size: 11px;">Maintain a minimum of 20% clear space surrounding fragrance bottles in all marketing materials.</p>
+          <h3 style="font-size: 12.5px;">Framing Standard</h3>
+          <p style="font-size: 11px;">Maintain a strict minimum of 20% clear negative space surrounding fragrance bottles in all digital ad placements.</p>
         </div>
       </section>
 
-      <!-- SLIDE 7: ASSET GENERATOR -->
+      <!-- SLIDE 7: SPACING & GRIDS -->
+      <section class="slide">
+        <div>
+          <span class="kicker">Layout Architecture</span>
+          <h1>Spacing & Grid Layouts</h1>
+          <p class="lead">The layout system operates on a flexible 8pt scaling rhythm to maintain vertical and horizontal harmony.</p>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>Micro Spacing (4px - 8px)</h3>
+            <p>Used for tight component groupings, badge padding, and icon margins.</p>
+          </div>
+          <div class="card">
+            <h3>Base Spacing (16px - 24px)</h3>
+            <p>Standard padding for content cards, form inputs, and grid gaps.</p>
+          </div>
+          <div class="card">
+            <h3>Macro Spacing (32px - 48px)</h3>
+            <p>Section dividers, viewport page padding, and major layout blocks.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: UI COMPONENT KIT -->
+      <section class="slide">
+        <div>
+          <span class="kicker">Digital Components</span>
+          <h1>UI Component Kit</h1>
+          <p class="lead">Standardized buttons, badges, and notification elements used across web applications.</p>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Command Buttons</h3>
+            <div style="display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap;">
+              <button class="nav-btn-cmd" style="padding: 8px 16px;">Primary Action</button>
+              <button class="nav-btn-cmd" style="background: transparent; color: var(--burgundy); border-color: var(--burgundy); padding: 8px 16px;">Secondary Action</button>
+            </div>
+          </div>
+          <div class="card">
+            <h3>System Status Badges</h3>
+            <div style="display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap;">
+              <span class="tone-badge" style="background: var(--green-text); color: #fff; padding: 6px 12px;">ACTIVE DEPLOYMENT</span>
+              <span class="tone-badge" style="background: var(--red-text); color: #fff; padding: 6px 12px;">BUILD FAILED</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: ASSET GENERATOR -->
       <section class="slide">
         <div>
           <span class="kicker">Interactive Utility</span>
           <h1>Brand Card Generator</h1>
-          <p class="lead">Generate brand-compliant asset cards dynamically inside your workspace.</p>
+          <p class="lead">Configure and preview brand-compliant asset cards dynamically inside your workspace.</p>
         </div>
 
         <div class="grid grid-2">
@@ -800,7 +873,7 @@
               <label for="assetDesc">Description Text</label>
               <input type="text" id="assetDesc" value="Master-blended fine fragrance in dark glass." oninput="updatePreview()">
             </div>
-            <button class="nav-btn-cmd" style="width:100%; margin-top:8px;" onclick="copyHex('Card Design Generated!')">Copy Token Spec</button>
+            <button class="nav-btn-cmd" style="width:100%; margin-top:8px;" onclick="copyHex('Asset Configuration Saved!')">Export Token Config</button>
           </div>
 
           <div class="card" id="previewCard" style="background: var(--burgundy); color: #ffffff; border-color: var(--gold); display: flex; flex-direction: column; justify-content: center; text-align: center; padding: 20px;">
@@ -810,8 +883,30 @@
                 <path d="M34 34L40 41L50 29L60 41L66 34L69 46H31L34 34Z" fill="#C5A059"/>
               </svg>
             </div>
-            <h3 id="prevTitle" style="color: #ffffff; font-size: 16px; margin-bottom: 4px;">Velour No. 5 Parfum</h3>
+            <h3 id="prevTitle" style="color: #ffffff; font-size: 15px; margin-bottom: 4px;">Velour No. 5 Parfum</h3>
             <p id="prevDesc" style="color: var(--gold-light); font-size: 11px;">Master-blended fine fragrance in dark glass.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: EXPORT & RESOURCES -->
+      <section class="slide">
+        <div>
+          <span class="kicker">Resources</span>
+          <h1>Export & Guidelines Download</h1>
+          <p class="lead">Access master design source files, vector emblems, and typography package links.</p>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Vector Asset Pack</h3>
+            <p>Download full SVG emblem suites, lockups, and high-resolution brand badge files.</p>
+            <button class="nav-btn-cmd" style="margin-top: 14px;" onclick="copyHex('Download Link Copied!')">Download SVG Pack</button>
+          </div>
+          <div class="card">
+            <h3>Figma Design System</h3>
+            <p>Access the live Figma component library and token plugin variables.</p>
+            <button class="nav-btn-cmd" style="margin-top: 14px;" onclick="copyHex('Figma Link Copied!')">Open Figma Library</button>
           </div>
         </div>
       </section>
@@ -819,7 +914,7 @@
       <!-- Page Nav Footer Controls -->
       <footer class="controls-bar">
         <button class="nav-btn-cmd" onclick="prevSlide()">← Previous</button>
-        <span class="page-indicator" id="pageIndicator">Page 01 / 07</span>
+        <span class="page-indicator" id="pageIndicator">Page 01 / 10</span>
         <button class="nav-btn-cmd" onclick="nextSlide()">Next →</button>
       </footer>
 
@@ -832,7 +927,7 @@
 
 <script>
   let currentSlide = 0;
-  const totalSlides = 7;
+  const totalSlides = 10;
 
   function updateSlideDisplay() {
     const slides = document.querySelectorAll('.slide');
@@ -846,10 +941,13 @@
       n.classList.toggle('active', i === currentSlide);
     });
 
-    document.getElementById('pageIndicator').textContent = `Page 0${currentSlide + 1} / 0${totalSlides}`;
+    const displayNum = String(currentSlide + 1).padStart(2, '0');
+    const totalNum = String(totalSlides).padStart(2, '0');
+    document.getElementById('pageIndicator').textContent = `Page ${displayNum} / ${totalNum}`;
     
     // Close mobile menu when nav item clicked
     document.getElementById('sidebar').classList.remove('open');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function goToSlide(index) {
